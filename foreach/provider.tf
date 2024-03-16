@@ -5,6 +5,13 @@ terraform {
       version = "5.36.0"
     }
   }
+
+  backend "s3" {
+    bucket = "roboshopp-remote-state"
+    key = "foreach-demo"     # foreach-demo is the name of state file
+    region = "us-east-1"
+    dynamodb_table = "roboshop-locking" # DynamoDB table used for state locking to prevent concurrent modifications
+  }
 }
 
 provider "aws" {
